@@ -35,100 +35,111 @@ class _PlayDicePageState extends State<PlayDicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(
-          widget.title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Text(
-            'Total is $total',
+        appBar: AppBar(
+          leading: const Icon(Icons.casino, color: Colors.white),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Text(
+            widget.title,
             style: const TextStyle(
-              fontSize: 20,
+              color: Colors.white,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          Image.asset(
-            total > 6 ? highResultImagePath : lowResultImagePath,
-            width: 200,
-            height: 300,
-          ),
-          Row(
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                alignment: Alignment.center,
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                child: Text(
-                  "$dice1",
-                  style: const TextStyle(fontSize: 30, color: Colors.white),
+            children: <Widget>[
+              Text(
+                'Total is $total',
+                style: const TextStyle(
+                  fontSize: 20,
                 ),
               ),
-              const SizedBox(
-                width: 10,
+              Image.asset(
+                total >= 10 ? highResultImagePath : lowResultImagePath,
+                width: 200,
+                height: 300,
               ),
-              Container(
-                alignment: Alignment.center,
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).colorScheme.primary,
+              Text(
+                total >= 10 ? 'You Win' : 'You Lose',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: total >= 10 ? Colors.green : Colors.red,
                 ),
-                child: Text(
-                  "$dice2",
-                  style: const TextStyle(fontSize: 30, color: Colors.white),
-                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    child: Text(
+                      "$dice1",
+                      style: const TextStyle(fontSize: 30, color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    child: Text(
+                      "$dice2",
+                      style: const TextStyle(fontSize: 30, color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(Colors.red),
+                      ),
+                      onPressed: roll,
+                      child: const Text(
+                        'Roll Dice',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(Colors.red),
+                      ),
+                      onPressed: reset,
+                      child: const Text(
+                        'Reset',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  style: const ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.red),
-                  ),
-                  onPressed: roll,
-                  child: const Text(
-                    'Roll Dice',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  style: const ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.red),
-                  ),
-                  onPressed: reset,
-                  child: const Text(
-                    'Reset',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

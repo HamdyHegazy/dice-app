@@ -13,8 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 188, 144, 238)),
+            seedColor: const Color.fromARGB(255, 188, 144, 238),
+            brightness: Brightness.dark),
         useMaterial3: true,
       ),
       home: const PlayDicePage(title: 'Play Dice'),
